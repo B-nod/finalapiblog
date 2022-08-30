@@ -34,5 +34,8 @@ urlpatterns = [
     path('api/post/delete/<int:pk>',views.PostRetrieveDestroy.as_view()),
     path('api/post/<int:pk>/comment', views.CommentCreate.as_view()),
     path('api/approve/<int:postID>/',views.approve),
+    
+    # stripe integration
+    path('', include('payments.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

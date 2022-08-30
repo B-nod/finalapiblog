@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_cron',
+    'payments'
 ]
 
 REST_FRAMEWORK = {
@@ -151,3 +152,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CRONJOBS = [
 #     ('*/1 * * * *', 'posts.cron.print_hello')
 # ]
+
+if DEBUG:
+    STRIPE_PUBLISHABLE_KEY = 'pk_test_51LcNhhSHXUSx7fecRuRH7WuRmbTm8fsUFURqwzcNWhrSz6q1WVI719VEyH2UcU8XLFqQtYkLL0cya23H28LBom6A00jh4o4yPn'
+    STRIPE_SECRET_KEY = 'sk_test_51LcNhhSHXUSx7fecOQs2JWxZNhEI9FfFEtT16Z8hH1quO2sFKc67FhlrhPtTVz4yTKPXAOHibMs8yHea5Y6Aieex00y4cDN5lC'
+# else:
+#     STRIPE_PUBLISHABLE_KEY = 'production_publishable_key'
+#     STRIPE_SECRET_KEY = 'production_secret_key'
