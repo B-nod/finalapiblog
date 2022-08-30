@@ -1,5 +1,18 @@
-from . models import *
-import random 
+# from . models import *
+# import random 
 
-def print_hello():
-    number = random.randint(0, 100)
+# def print_hello():
+#     number = random.randint(0, 100)
+#     # Notification.objects.create(notification_name = number)
+#     print (number)
+
+from django_cron import CronJobBase, Schedule
+
+class MyCronJob(CronJobBase):
+    RUN_EVERY_MINS = 1 # every 2 hours
+
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    code = 'my_app.my_cron_job'    # a unique code
+
+    def do(self):
+        print("Hello")    # do your thing here

@@ -13,6 +13,8 @@ from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
 @csrf_exempt
 def signup(request):
@@ -89,21 +91,26 @@ class PostList(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(poster=self.request.user)
 
+@method_decorator(cache_page(10), name='dispatch')
 class PostView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    
     def get_queryset(self):
+        print("Running without cache")
         return Post.objects.filter()
 
+@method_decorator(cache_page(10), name='dispatch')
 class EachPostView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Post.objects.filter(poster=self.request.user, approved=True)
+        print("Running without cache")
+        return Post.objects.filter(poster=self.request.user)
 
 
 

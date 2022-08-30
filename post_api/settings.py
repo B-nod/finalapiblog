@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'posts',
     'rest_framework',
     'rest_framework.authtoken',
-    'django_crontab',
+    'django_cron',
 ]
 
 REST_FRAMEWORK = {
@@ -58,6 +58,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CRON_CLASSES = [
+    "posts.cron.MyCronJob",
+    # ...
 ]
 
 ROOT_URLCONF = 'post_api.urls'
@@ -143,6 +148,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRONJOBS = [
-    ('*/2 * * * *', 'posts.cron.print_hello')
-]
+# CRONJOBS = [
+#     ('*/1 * * * *', 'posts.cron.print_hello')
+# ]
