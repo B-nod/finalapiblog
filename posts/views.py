@@ -110,7 +110,7 @@ class EachPostView(generics.ListAPIView):
 
     def get_queryset(self):
         print("Running without cache")
-        return Post.objects.filter(poster=self.request.user)
+        return Post.objects.filter(poster=self.request.user, approved=True)
 
 
 
