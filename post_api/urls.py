@@ -27,6 +27,7 @@ urlpatterns = [
     path('api/sendrequest/<int:userID>/', views.send_request),
     path('api/acceptrequest/<int:requestID>/', views.accept_request),
     path('api/post', views.PostList.as_view()),
+    path('api/unapproved', views.PostUnapporved.as_view()),
     path('api/getall', views.PostView.as_view()),
     path('api/get', views.EachPostView.as_view()),
     path('api-auth/', include('rest_framework.urls')),
@@ -34,6 +35,11 @@ urlpatterns = [
     path('api/post/delete/<int:pk>',views.PostRetrieveDestroy.as_view()),
     path('api/post/<int:pk>/comment', views.CommentCreate.as_view()),
     path('api/approve/<int:postID>/',views.approve),
+    path('api/requestlist',views.RequestList.as_view()),
+    path('api/sendlist',views.SendList.as_view()),
+
+    path('api/deleterequest/<int:pk>',views.RequestDelete.as_view()),
+    path('api/cancelrequest/<int:pk>',views.RequestSelfDecline.as_view()),
     
     # stripe integration
     path('', include('payments.urls')),

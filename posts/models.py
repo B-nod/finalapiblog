@@ -5,8 +5,9 @@ class User(AbstractUser):
     friends = models.ManyToManyField("User", blank=True)
 
 class Friend_Request(models.Model):
-    from_user = models.ForeignKey(User, related_name='posts_from_user', on_delete=models.CASCADE)
+    request_user = models.ForeignKey(User, related_name='posts_from_user', on_delete=models.CASCADE)
     to_user = models.ForeignKey(User, related_name='posts_to_user', on_delete=models.CASCADE)
+    is_friend = models.BooleanField(default=False)
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
